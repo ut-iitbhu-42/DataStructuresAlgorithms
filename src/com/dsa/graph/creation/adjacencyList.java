@@ -13,26 +13,42 @@ public class adjacencyList {
         int vertices = scanner.nextInt();
         int edges = scanner.nextInt();
 
-        //initialize space for storing Graph
-        ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
-        for(int i=0; i<=vertices; i++)
-            adjList.add(new ArrayList<>());
-
-        //input of all the edges
+        // input for edge details i.e., 1 2 => edge exist btwn 1 & 2
+        int edgeArr[][] = new int[edges][2];
         for(int i=0; i<edges; i++){
-            int startVertex = scanner.nextInt();
-            int endVertex = scanner.nextInt();
-
-            adjList.get(startVertex).add(endVertex);
-            adjList.get(endVertex).add(startVertex);
+            edgeArr[i][0] = scanner.nextInt();
+            edgeArr[i][1] = scanner.nextInt();
         }
 
-        // printing the adjacency List
-            for(int i=0; i<=vertices; i++){
-                System.out.println("Vertex" + i + " -> " + adjList.get(i));
-            }
-
+        createAdjacencyList(vertices, edges, edgeArr);
     }
 
+    static void createAdjacencyList(int vertices, int edges, int edgeArr[][]){
+
+        ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
+
+        System.out.println("\nInitializing Adjacency List");
+        for(int i=0; i<=vertices; i++)
+            adjList.add(new ArrayList<>());
+        printAdjacencyList(adjList);
+
+        System.out.println("\nCreating Adjacency List");
+        for(int i=0; i<edges; i++)
+            addEdges(adjList, edgeArr[i][0], edgeArr[i][1]);
+
+        printAdjacencyList(adjList);
+    }
+
+    static void addEdges(ArrayList<ArrayList<Integer>> adjList, int sourceVertex, int destinationVertex){
+        adjList.get(sourceVertex).add(destinationVertex);
+        adjList.get(destinationVertex).add(sourceVertex);
+    }
+
+    static void printAdjacencyList(ArrayList<ArrayList<Integer>> adjList){
+        int len = adjList.size(); // it will be equal to the vertices+1
+        for(int i=0; i<len; i++){
+            System.out.println(i + "->" + adjList.get(i));
+        }
+    }
 
 }
