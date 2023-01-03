@@ -23,6 +23,9 @@ public class adjacencyList {
         createAdjacencyList(vertices, edges, edgeArr);
     }
 
+    // static method is like a utility or helper
+    // static doesn't depend on the object instance
+    // static method can be utilized without object creation
     static void createAdjacencyList(int vertices, int edges, int edgeArr[][]){
 
         ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
